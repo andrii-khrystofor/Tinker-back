@@ -13,9 +13,9 @@ namespace Tinker_Back.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
-        private readonly Tinker_DBContext _context;
+        private readonly TinkerDbContext _context;
 
-        public MessagesController(Tinker_DBContext context)
+        public MessagesController(TinkerDbContext context)
         {
             _context = context;
         }
@@ -87,7 +87,7 @@ namespace Tinker_Back.Controllers
         {
           if (_context.Messages == null)
           {
-              return Problem("Entity set 'Tinker_DBContext.Messages'  is null.");
+              return Problem("Entity set 'TinkerDbContext.Messages'  is null.");
           }
             _context.Messages.Add(message);
             try

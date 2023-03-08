@@ -13,9 +13,9 @@ namespace Tinker_Back.Controllers
     [ApiController]
     public class ChatsController : ControllerBase
     {
-        private readonly Tinker_DBContext _context;
+        private readonly TinkerDbContext _context;
 
-        public ChatsController(Tinker_DBContext context)
+        public ChatsController(TinkerDbContext context)
         {
             _context = context;
         }
@@ -87,7 +87,7 @@ namespace Tinker_Back.Controllers
         {
           if (_context.Chats == null)
           {
-              return Problem("Entity set 'Tinker_DBContext.Chats'  is null.");
+              return Problem("Entity set 'TinkerDbContext.Chats'  is null.");
           }
             _context.Chats.Add(chat);
             await _context.SaveChangesAsync();
