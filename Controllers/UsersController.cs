@@ -13,9 +13,9 @@ namespace Tinker_Back.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly Tinker_DBContext _context;
+        private readonly TinkerDbContext _context;
 
-        public UsersController(Tinker_DBContext context)
+        public UsersController(TinkerDbContext context)
         {
             _context = context;
         }
@@ -87,7 +87,7 @@ namespace Tinker_Back.Controllers
         {
           if (_context.Users == null)
           {
-              return Problem("Entity set 'Tinker_DBContext.Users'  is null.");
+              return Problem("Entity set 'TinkerDbContext.Users'  is null.");
           }
             _context.Users.Add(user);
             await _context.SaveChangesAsync();

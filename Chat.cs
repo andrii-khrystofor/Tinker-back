@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tinker_Back
+namespace Tinker_Back;
+
+public partial class Chat
 {
-    public partial class Chat
-    {
-        public Chat()
-        {
-            UserToChats = new HashSet<UserToChat>();
-        }
+    public int Id { get; set; }
 
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public bool? IsGroupChat { get; set; }
-        public string? Description { get; set; }
+    public string Name { get; set; } = null!;
 
-        public virtual Message Message { get; set; } = null!;
-        public virtual ICollection<UserToChat> UserToChats { get; set; }
-    }
+    public bool? IsGroupChat { get; set; }
+
+    public string? Description { get; set; }
+
+    public virtual ICollection<Message> Messages { get; } = new List<Message>();
+
+    public virtual ICollection<UserToChat> UserToChats { get; } = new List<UserToChat>();
 }

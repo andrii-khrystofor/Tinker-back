@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tinker_Back
-{
-    public partial class UserToChat
-    {
-        public int Id { get; set; }
-        public int ChatId { get; set; }
-        public int UserId { get; set; }
+namespace Tinker_Back;
 
-        public virtual Chat Chat { get; set; } = null!;
-        public virtual User User { get; set; } = null!;
-    }
+public partial class UserToChat
+{
+    public int Id { get; set; }
+
+    public int ChatId { get; set; }
+
+    public int UserId { get; set; }
+
+    public virtual Chat Chat { get; set; } = null!;
+
+    public virtual User User { get; set; } = null!;
 }

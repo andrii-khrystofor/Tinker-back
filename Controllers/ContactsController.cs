@@ -13,9 +13,9 @@ namespace Tinker_Back.Controllers
     [ApiController]
     public class ContactsController : ControllerBase
     {
-        private readonly Tinker_DBContext _context;
+        private readonly TinkerDbContext _context;
 
-        public ContactsController(Tinker_DBContext context)
+        public ContactsController(TinkerDbContext context)
         {
             _context = context;
         }
@@ -87,7 +87,7 @@ namespace Tinker_Back.Controllers
         {
           if (_context.Contacts == null)
           {
-              return Problem("Entity set 'Tinker_DBContext.Contacts'  is null.");
+              return Problem("Entity set 'TinkerDbContext.Contacts'  is null.");
           }
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
