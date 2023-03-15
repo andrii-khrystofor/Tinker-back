@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Tinker_Back;
+using Tinker_Back.Models;
 
 namespace Tinker_Back.Controllers
 {
