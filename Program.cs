@@ -1,4 +1,4 @@
-using Tinker_Back;
+using Tinker_Back.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

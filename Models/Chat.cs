@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tinker_Back;
+namespace Tinker_Back.Models;
 
 public partial class Chat
 {
@@ -12,6 +12,8 @@ public partial class Chat
     public bool? IsGroupChat { get; set; }
 
     public string? Description { get; set; }
+
+    public bool? IsPinned { get; set; }
 
     public virtual ICollection<Message> Messages { get; } = new List<Message>();
 
