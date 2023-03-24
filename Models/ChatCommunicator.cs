@@ -32,9 +32,9 @@ namespace Tinker_Back
         {
             ProcessChatIfExist(chatID, (Chat chat) => _context.Chats.Remove(chat));
         }
-        public void ChangeDescription(int chatID, string newText)
+        public void ChangeDescription(int chatID, string newDescription)
         {
-            ProcessChatIfExist(chatID, (Chat chat) => chat.Description = newText);
+            ProcessChatIfExist(chatID, (Chat chat) => chat.Description = newDescription);
         }
         public void ChangeName(int chatID, string newName)
         {
