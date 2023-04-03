@@ -1,10 +1,10 @@
 ﻿using Tinker_Back.Models;
 
-namespace Tinker_Back
+namespace Tinker_Back.Communication
 {
     public class MessageCommunicator
     {
-        public MessageCommunicator(TinkerDbContext dbContext) 
+        public MessageCommunicator(TinkerDbContext dbContext)
         {
             DbContext = dbContext;
         }
@@ -14,13 +14,13 @@ namespace Tinker_Back
             if (message != null)
             {
                 func(message);
+                DbContext.SaveChanges();
             }
-            DbContext.SaveChanges();
         }
 
-        private void ProcessPinMessage(int messageId, bool needPin) 
+        private void ProcessPinMessage(int messageId, bool needPin)
         {
-            ProcessMessageIfExists(messageId, (Message message)
+            ProcessMessageIfExists(messageId, (message)
                 => message.IsPinned = needPin);
         }
         public void SendMessage(string text, DateTime timeSent, int senderId, int chatId)
@@ -32,13 +32,13 @@ namespace Tinker_Back
 
         public void DeleteMessage(int messageId)
         {
-            ProcessMessageIfExists(messageId, (Message message) 
+            ProcessMessageIfExists(messageId, (message)
                 => DbContext.Messages.Remove(message));
         }
 
-        public void EditMessage(int messageId, String newText)
+        public void EditMessage(int messageId, string newText)
         {
-            ProcessMessageIfExists(messageId, (Message message)
+            ProcessMessageIfExists(messageId, (message)
                 => message.Text = newText);
         }
 
@@ -55,7 +55,7 @@ namespace Tinker_Back
         public void ForwardMessage(int messageId, DateTime timeSent, int chatId, int senderId)
         {
             ProcessMessageIfExists(messageId,
-              (Message message) =>
+              (message) =>
               {
                   Message NewMessage = new Message(message.Text, timeSent, chatId, senderId);
                   DbContext.Messages.Add(NewMessage);
@@ -66,7 +66,7 @@ namespace Tinker_Back
         public void ReplyToMessage(string text, DateTime timeSent, int senderId, int repliedToMessageId)
         {
             ProcessMessageIfExists(repliedToMessageId,
-                (Message message) =>
+                (message) =>
                 {
                     Message NewMessage = new Message(text, timeSent, senderId, message.ChatId);
                     NewMessage.RepliesToMessageId = repliedToMessageId;
