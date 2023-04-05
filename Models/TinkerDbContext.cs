@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace Tinker_Back;
+namespace Tinker_Back.Models;
 
 public partial class TinkerDbContext : DbContext
 {
@@ -26,8 +26,9 @@ public partial class TinkerDbContext : DbContext
     public virtual DbSet<UserToChat> UserToChats { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=165.22.85.146;TrustServerCertificate=true;Initial Catalog=Tinker_DB;User ID=SA;Password=AndreyKrutiyProjectManagerUNyogoVseViydeYakshodastMeniStick1,mozhe2AleNeProstoTakAZaKrasivi%");
+        => optionsBuilder.UseSqlServer("Data Source=165.22.85.146;TrustServerCertificate=true;" +
+            "Initial Catalog=Tinker_DB;User ID=SA;Password=AndreyKrutiyProjectManagerUNyogoVseViydeYakshodastMeniStick1," +
+            "mozhe2AleNeProstoTakAZaKrasivi%");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -41,6 +42,8 @@ public partial class TinkerDbContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasColumnName("name");
+            entity.Property(e => e.IsPinned)
+                .HasColumnName("isPinned");
         });
 
         modelBuilder.Entity<Contact>(entity =>
@@ -67,9 +70,13 @@ public partial class TinkerDbContext : DbContext
             entity.Property(e => e.IsPinned).HasColumnName("isPinned");
             entity.Property(e => e.SenderId).HasColumnName("senderId");
             entity.Property(e => e.SentTime)
-                .IsRowVersion()
-                .IsConcurrencyToken()
                 .HasColumnName("sentTime");
+            entity.Property(e => e.isSeen)
+                .HasColumnName("isSeen");
+            entity.Property(e => e.isForwarded)
+                .HasColumnName("isForwarded");
+            entity.Property(e => e.RepliesToMessageId)
+            .HasColumnName("RepliedMessageId");
             entity.Property(e => e.Text).HasColumnName("text");
 
             entity.HasOne(d => d.Chat).WithMany(p => p.Messages)

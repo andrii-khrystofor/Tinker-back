@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tinker_Back;
+namespace Tinker_Back.Models;
 
 public partial class UserToChat
 {
